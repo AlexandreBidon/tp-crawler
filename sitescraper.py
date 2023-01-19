@@ -23,6 +23,9 @@ class SiteScrapper():
         self.main_url = main_url
         self.__initialize_robots()
 
+    def run_scraping():
+        pass
+
     def __initialize_robots(self):
         # Check if the robots.txt of the given website allows us to scrap
         self.robotcheck = robotparser.RobotFileParser()
@@ -45,7 +48,7 @@ class SiteScrapper():
         
         pass
 
-    def scrap_page(page_url : str):
+    def scrap_page(self,page_url : str):
         """
         # Scrap a given page to find new urls
 
