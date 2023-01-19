@@ -9,6 +9,11 @@ class SiteScrapper():
     Given an entry point and a number of pages to return, 
     this class will scrap all website it is allowed to scrap 
     in order to find new pages
+
+    Returns :
+    Two lists
+    page_found : all the page found in the website that where allowed by robots.txt
+    external_site : list of all the other websites. Those sites were not checked by robots.txt
     """
 
     def __init__(
@@ -17,7 +22,6 @@ class SiteScrapper():
 
         self.main_url = main_url
         self.__initialize_robots(self.main_url)
-
 
     def __initialize_robots(self, main_url : str):
         # Check if the robots.txt of the given website allows us to scrap
