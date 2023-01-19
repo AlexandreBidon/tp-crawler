@@ -22,9 +22,14 @@ class SiteScrapper():
 
         self.main_url = main_url
         self.__initialize_robots()
+        self.internal_page = []
+        self.new_site = []
 
-    def run_scraping():
-        pass
+    def run_scraping(self, remove_picture = True):
+        self.internal_page = self.site_map()
+        if remove_picture:
+            self.remove_picture()
+        return self.internal_page, self.new_site
 
     def __initialize_robots(self):
         # Check if the robots.txt of the given website allows us to scrap
@@ -61,6 +66,13 @@ class SiteScrapper():
             url_extract_pattern
             ,webpage)
         return(findPatLink)
+    
+    def remove_picture(self):
+        """
+        Remove all pages finishing with .png or .jpg
+        """
+        self.internal_page = [val for val in self.internal_page if not val.endswith(".png")]
+        self.internal_page = [val for val in self.internal_page if not val.endswith(".jpg")]
 
         
     
