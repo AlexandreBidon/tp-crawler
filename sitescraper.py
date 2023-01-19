@@ -2,7 +2,7 @@ from urllib.request import urlopen
 from urllib import robotparser
 from bs4 import BeautifulSoup
 import re
-
+import utils
 
 class SiteScrapper():
     """
@@ -21,16 +21,21 @@ class SiteScrapper():
         ,main_url : str):
 
         self.main_url = main_url
-        self.__initialize_robots(self.main_url)
+        self.__initialize_robots()
 
-    def __initialize_robots(self, main_url : str):
+    def __initialize_robots(self):
         # Check if the robots.txt of the given website allows us to scrap
         self.robotcheck = robotparser.RobotFileParser()
         self.robotcheck.set_url(self.main_url + "/robots.txt")
         self.robotcheck.read()
 
     def site_map(self):
-        return self.robotcheck.site_maps()
+        pages_list = []
+        for site_map in self.robotcheck.site_maps():
+            pages_list.append(self.scrap_page(site_map))
+        pages_list = set(utils.flatten(pages_list))
+        return(pages_list)
+
 
     def extract_site_page(self):
         """
@@ -47,7 +52,11 @@ class SiteScrapper():
         Returns : a list of all the url found
         """
         webpage=urlopen(page_url).read().decode('utf-8')
-        findPatLink=re.findall('"((http|ftp)s?://.*?)"',webpage)
+        url_extract_pattern = 'https?:\\/\\/(?:www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*)'
+        # url_test = '"((http|ftp)s?://.*?)"'
+        findPatLink=re.findall(
+            url_extract_pattern
+            ,webpage)
         return(findPatLink)
 
         
