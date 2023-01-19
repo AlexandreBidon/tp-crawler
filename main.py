@@ -1,8 +1,7 @@
-from urllib.request import urlopen
-from bs4 import BeautifulSoup
-import re
+# TODO : create a main.py demo
 
-webpage=urlopen('https://ensai.fr/').read().decode('utf-8')
+from sitescraper import SiteScrapper
 
-findPatLink=re.findall('"((http|ftp)s?://.*?)"',webpage)
-print(findPatLink)
+test = SiteScrapper("https://ensai.fr")
+print(test.site_map())
+
