@@ -2,6 +2,7 @@
 from sitescraper import SiteScrapper
 
 
-test = SiteScrapper("https://ensai.fr/")
-website_list, empty_list= test.run_scraping()
-print(website_list)
+test = SiteScrapper("https://ensai.fr")
+website_list, new_list= test.run_scraping()
+
+print(new_list)

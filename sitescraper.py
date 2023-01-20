@@ -1,5 +1,6 @@
 from urllib.request import urlopen
 from urllib import robotparser
+from urllib.parse import urlparse
 from bs4 import BeautifulSoup
 import re
 import utils
@@ -27,6 +28,7 @@ class SiteScrapper():
 
     def run_scraping(self, remove_picture = True):
         self.internal_page = self.site_map()
+        self.new_site = self.scrap_new_link()
         if remove_picture:
             self.remove_picture()
         return self.internal_page, self.new_site
@@ -74,5 +76,15 @@ class SiteScrapper():
         self.internal_page = [val for val in self.internal_page if not val.endswith(".png")]
         self.internal_page = [val for val in self.internal_page if not val.endswith(".jpg")]
 
-        
-    
+    def scrap_new_link(self):
+        """
+        Return the main url of all the new websites found in the current main url explored
+        """
+        website_list = self.scrap_page(self.main_url)
+        website_list = [ x for x in website_list if self.main_url not in x ]
+        parsed_list = []
+        for website in website_list:
+            domain = urlparse(website)
+            parsed_list.append(domain.scheme +"://" + domain.netloc)
+        parsed_list = set(parsed_list)
+        return(parsed_list)
