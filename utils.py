@@ -13,3 +13,11 @@ def url_to_main(url : str):
     domain = urlparse(url)
     url = domain.scheme +"://" + domain.netloc
     return(url)
+
+def list_to_txt(url_list : list, filename : str):
+    """
+    found here : https://stackoverflow.com/questions/899103/writing-a-list-to-a-file-with-python-with-newlines
+    """
+    with open(filename, 'w') as f:
+        for line in url_list:
+            f.write(f"{line}\n")
