@@ -7,13 +7,12 @@ import utils
 
 class SiteScrapper():
     """
-    Given an entry point and a number of pages to return, 
-    this class will scrap all website it is allowed to scrap 
-    in order to find new pages
+    Given an url, 
+    this class will scrap all the website it is allowed to scrap 
 
     Returns :
     Two lists
-    page_found : all the page found in the website that where allowed by robots.txt
+    internal_page : all the page found in the website that where allowed by robots.txt
     external_site : list of all the other websites. Those sites were not checked by robots.txt
     """
 
@@ -24,14 +23,14 @@ class SiteScrapper():
         self.main_url = main_url
         self.__initialize_robots()
         self.internal_page = []
-        self.new_site = []
+        self.external_site = []
 
     def run_scraping(self, remove_picture = True):
         self.internal_page = self.site_map()
-        self.new_site = self.scrap_new_link()
+        self.external_site = self.scrap_new_link()
         if remove_picture:
             self.remove_picture()
-        return self.internal_page, self.new_site
+        return self.internal_page, self.external_site
 
     def __initialize_robots(self):
         # Check if the robots.txt of the given website allows us to scrap
@@ -45,11 +44,11 @@ class SiteScrapper():
         if site_map is not None:
             for site_map in site_map:
                 pages_list.append(self.scrap_page(site_map))
-            pages_list = set(utils.flatten(pages_list))
+            pages_list = list(set(utils.flatten(pages_list)))
             return(pages_list)
         else :
-            # No site-map so we return nothing
-            return([])
+            # No site-map so we return the home page
+            return([self.main_url])
 
     def scrap_page(self,page_url : str):
         """
@@ -86,7 +85,7 @@ class SiteScrapper():
             for website in website_list:
                 domain = urlparse(website)
                 parsed_list.append(domain.scheme +"://" + domain.netloc)
-            parsed_list = set(parsed_list)
+            parsed_list = list(set(parsed_list))
             return(parsed_list)
         else :
             # Not allowed to scrap the website, returns nothing
