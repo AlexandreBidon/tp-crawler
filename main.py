@@ -6,7 +6,7 @@ import utils
 test1 = "https://help.twitter.com"
 test2 = "https://ensai.fr"
 
-crawler = Crawler(max_websites=100)
+crawler = Crawler(max_websites=30)
 
 pages_found = crawler.run(test2)
 

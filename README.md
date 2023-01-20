@@ -33,6 +33,7 @@ Les sitemaps présentent plusieurs problèmes pour le script actuel :
 - **site sans sitemap** : certains sites n'ont pas de sitemap défini dans le fichier robots.txt. Le script actuel utilise uniquement le sitemap pour répertorier les pages d'un site avant de passer au suivant. Les pages de ce site ne sont donc pas ajoutées au répertoire. Il serait possible d'ajouter une nouvelle fonction qui traverse manuellement un site lorsqu'elle ne trouve pas de sitemap. Ce choix n'a pas été retenue afin de traverser un plus grand nombre de site plutot que de se concentrer sur un seul.
 De la même manière, le script ne trouve pas les pages qui ne sont pas répertoriées dans le sitemap d'un site.
 
+- **sitemap avec plusieurs langues** : certains sites présentent un grand nombre de sitemap pour chaque langue. Le crawling est donc très long sur ces sites.
 
 
 ## TODO
