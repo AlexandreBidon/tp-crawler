@@ -16,7 +16,14 @@ Pour commencer il faut installer les dépendances du projet :
 
 > pip install -r requirements.txt
 
-Le fichier main.py contient une démo du crawler. 
+Il est ensuite possible d'utiliser le crawler avec la commande suivante :
+
+> python3 main.py --min_websites 30
+
+L'argument **min_websites** correspond au nombre minimum de pages à crawler. Il est aussi possible d'utiliser l'argument **start_url** pour choisir la première url à scraper. 
+
+La commande retourne un fichier texte dans le dossier *result*. Ce dossier contient la liste des pages qui ont été trouvées.
+
 
 ## Fonctionnement
 

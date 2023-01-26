@@ -3,7 +3,7 @@ from urllib import robotparser
 from urllib.parse import urlparse
 from bs4 import BeautifulSoup
 import re
-import utils
+import crawler.utils as utils
 
 class SiteScrapper():
     """

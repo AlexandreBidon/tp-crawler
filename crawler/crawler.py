@@ -1,5 +1,5 @@
-import utils
-from sitescraper import SiteScrapper
+import crawler.utils as utils
+from crawler.sitescraper import SiteScrapper
 
 class Crawler():
 
