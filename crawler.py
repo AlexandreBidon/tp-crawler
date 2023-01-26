@@ -10,7 +10,6 @@ class Crawler():
         self.already_visited = []
         self.to_visit = [entrypoint_url]
         self.pages_found = []
-        count_visited = 0
         for website_url in self.to_visit:
             website_url = utils.url_to_main(website_url)
             print("crawl " + website_url)
@@ -19,9 +18,8 @@ class Crawler():
             self.already_visited.append(website_url)
             self.pages_found += new_pages
             self.to_visit += [ x for x in new_sites if x not in self.to_visit ]
-            count_visited += 1
-            print("visited : " + str(count_visited))
-            if count_visited >= self.max_websites:
+            print("visited : " + str(len(new_pages)))
+            if len(self.pages_found) >= self.max_websites:
                 print("stop")
                 break
         return(self.pages_found)
