@@ -24,6 +24,11 @@ L'argument **min_websites** correspond au nombre minimum de pages à crawler. Il
 
 La commande retourne un fichier texte dans le dossier *result*. Ce dossier contient la liste des pages qui ont été trouvées.
 
+### Comment lancer les tests
+
+Il est possible de lancer les tests de la manière suivante :
+
+> python3 -m unittest tests.test_utils
 
 ## Fonctionnement
 
